@@ -16,27 +16,13 @@ div.a {
         font-family: 'Quicksand', sans-serif;
 }
 </style>
-<div class="a p-0 mb-0" style="position:absolute;top:0px;left:0px; width: 100%; background-color:#f0f2f4;">
-   <p class="" style= > </p>
-       <div class="menu">
-         <div class="logo">
-           <a class="nav-link" href="..\html\index.html"><img src="..\img\logo.png" alt="" width="200" height="75" ></a>
-         </div>
-             <ul class="nav justify-content-end">
-               <li class="nav-item">
-                 <a class="nav-link active" href="index.html"><img src="https://img.icons8.com/ios/25/000000/home.png"> Home</a>
-               </li>
-         <li class="nav-item">
-           <a class="nav-link active" href="cadastrar.html"><img src="https://img.icons8.com/ios/25/000000/add-user-group-man-man.png"> Cadastrar</a>
-         </li>
-         <li class="nav-item">
-           <a class="nav-link" href="#"><img src="https://img.icons8.com/ios/25/000000/enter-2.png"> Login</a>
-         </li>
-         <li class="nav-item">
-           <a class="nav-link" href="#"> <img src="https://img.icons8.com/ios/25/000000/new-post.png"> SAC</a>
-         </li>
-       </ul> </div>
-</div>  </div>
+
+<?php
+$get = isset($_GET['pagina'])? $_GET['pagina']:'';
+require '../html/menu.php'
+ ?>
+
+ </div>
 
 <div class="formulario ">
 <h1>CADASTRO PARA BUSCAR FUNCIONÁRIO</h1>

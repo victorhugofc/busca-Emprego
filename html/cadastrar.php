@@ -17,108 +17,72 @@ div.a {
         text-align: center;
         font-family: 'Quicksand', sans-serif;
 }
-</style><div class="a p-0 mb-0" style="position:absolute;top:0px;left:0px; width: 100%; background-color:#f0f2f4;">
-   <p class="" style= > </p>
-       <div class="menu">
-         <div class="logo">
-           <a class="nav-link" href="..\html\index.html"><img src="..\img\logo.png" alt="" width="200" height="75" ></a>
-         </div>
-             <ul class="nav justify-content-end">
-               <li class="nav-item">
-                 <a class="nav-link active" href="index.html"><img src="https://img.icons8.com/ios/25/000000/home.png"> Home</a>
-               </li>
-         <li class="nav-item">
-           <a class="nav-link active" href="cadastrar.html"><img src="https://img.icons8.com/ios/25/000000/add-user-group-man-man.png"> Cadastrar</a>
-         </li>
-         <li class="nav-item">
-           <a class="nav-link" href="#"><img src="https://img.icons8.com/ios/25/000000/enter-2.png"> Login</a>
-         </li>
-         <li class="nav-item">
-           <a class="nav-link" href="#"> <img src="https://img.icons8.com/ios/25/000000/new-post.png"> SAC</a>
-         </li>
-       </ul> </div>
-</div>  </div>
+</style>
+<?php
+/*$get = isset($_GET['pagina'])? $_GET['pagina']:'';
+require '../html/menu.php';*/
+
+//aqui é só um exemplo para não rodar o script abaixo sem necessidade
+if ((isset($_POST['email']))&&(!empty($_POST['email']))){
+
+   //porta, usuário, senha, nome data base
+   //caso não consiga conectar mostra a mensagem de erro mostrada na conexão
+   $conexao = mysqli_connect("localhost", "root", "", "busca");
+
+  //Abaixo atribuímos os valores provenientes do formulário pelo método POST
+  $nome = $_POST['nome'];
+  $sobrenome = $_POST['sobrenome'];
+  $cpf = $_POST['cpf'];
+  $rg = $_POST['rg'];
+  $email = $_POST['email'];
+  $senha = $_POST['senha'];
+  $endereco = $_POST['endereco'];
+  $cidade = $_POST['cidade'];
+  $estado = $_POST['estado'];
+  $complemento = $_POST['complemento'];
+  $ultimo = $_POST['ultimo'];
+
+   $string_sql = "INSERT INTO empregado (id,nome,sobrenome,cpf,rg,email,senha,endereco,cidade,estado,complemento,ultimo) VALUES (null,'$nome,'$sobrenome,'$cpf','$rg','$email','$senha','$endereco','$cidade','$estado','$complemento','$ultimo')";
+   $insert_member_res = mysqli_query($conexao, $string_sql);
+   if(($conexao)>0){ //verifica se foi afetada alguma linha, nesse caso inserida alguma linha
+       echo "<p>Testemunho Registrado</p>";
+       echo '<a href="cadastrar.php">Voltar para formulário de cadastro</a>'; //Apenas um link para retornar para o formulário de cadastro
+   } else {
+       echo "Erro, não foi possível inserir no banco de dados";
+   }
+   mysqli_close($conexao); //fecha conexão com banco de dados
+}else{
+    echo "Por favor, preencha os dados";
+}
+ ?>
+</div>
+
 
 <div class="formulario ">
 <h1>CADASTRO PARA BUSCAR EMPRESA</h1>
-<form action="cadastrar.php" method="post" id="formulariocad">
-    <div class="form-row">
-      <div class="form-group col-md-6">
-        <label>Nome</label><br>
-        <input type="text" name="nome" class="form-control obrigatorio" value="">
-        <span class="text-danger"></span><br>
-      </div>
-      <div class="form-group col-md-6">
-        <label for="inputPassword4">Sobrenome</label>
-        <input type="text" name="nome" class="form-control obrigatorio" value="">
-        <span class="text-danger"></span><br>
-      </div>
-    </div>
-    <div class="form-row">
-      <div class="form-group col-md-6">
-        <label for="inputEmail4">CPF:</label>
-        <input type="text" class="form-control" id="inputEmail4" placeholder="...">
-      </div>
-      <div class="form-group col-md-6">
-        <label for="inputPassword4">RG:</label>
-        <input type="text" class="form-control" id="inputPassword4" placeholder="...">
-      </div>
-    </div>
-  <div class="form-row">
-    <div class="form-group col-md-6">
-      <label for="inputEmail4">Email</label>
-      <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
-    </div>
-    <div class="form-group col-md-6">
-      <label for="inputPassword4">Senha</label>
-      <input type="password" class="form-control" id="inputPassword4" placeholder="Senha">
-    </div>
-  </div>
-  <div class="form-group">
-    <label for="inputAddress">Endereço</label>
-    <input type="text" class="form-control" id="inputAddress" placeholder="Rua, 00">
-  </div>
-  <div class="form-group">
-    <label for="inputAddress2">Complemento</label>
-    <input type="text" class="form-control" id="inputAddress2" placeholder="Casa, apartamento...">
-  </div>
-  <div class="form-row">
-    <div class="form-group col-md-6">
-      <label for="inputCity">Cidade</label>
-      <input type="text" class="form-control" id="inputCity">
-    </div>
-    <div class="form-group col-md-4">
-      <label for="inputState">Estado</label>
-      <select id="inputState" class="form-control">
-        <option selected>Paraná</option>
-        <option>São Paulo</option>
-      </select>
-    </div>
-    <div class="form-group col-md-12 ">
-      <label for="inputAddress">Últimos Empregos</label>
-      <input type="text" class="form-control" id="inputAddress" placeholder="Empresa - 2000/2000">
-    </div>
-  </div>
-  <div class="form-row">
-    <div class="form-check">
-      <input class="form-check-input" type="checkbox" id="gridCheck">
-      <label class="form-check-label" for="gridCheck">
-          Definir Salário Desejado
-          <div class="form-row">
-            <div class="form-group col-md-6">
-              <label for="inputEmail4">Salário Inicial:</label>
-              <input type="text" class="form-control" id="inputEmail4" placeholder="R$">
-            </div>
-            <div class="form-group col-md-6">
-              <label for="inputPassword4">Salário Final:</label>
-              <input type="text" class="form-control" id="inputPassword4" placeholder="R$">
-            </div>
-          </div>
-      </label>
-    </div>
-  </div>
-  <button type="submit" class="btn btn-primary">Cadastrar</button>
-  <button type="submit" class="btn btn-primary">Cancelar</button>
+<form action="cadastrar.php" method="post">
+    Nome: <input type="text" name="nome"/>
+    <br>
+    Sobrenome: <input type="text" name="sobrenome"/>
+    <br>
+    cpf: <input type="text" name="cpf"/>
+    <br>
+    rg: <input type="text" name="rg"/>
+    <br>
+    email: <input type="text" name="email"/>
+    <br>
+    senha: <input type="text" name="senha"/>
+    <br>
+    endereco: <input type="text" name="endereco"/>
+    <br>
+    cidade: <input type="text" name="cidade"/>
+    <br>
+    estado: <input type="text" name="estado"/>
+    <br>
+    complemento: <input type="text" name="complemento"/>
+    <br>
+    Ultimo Serviço: <textarea name="ultimo" rows="10" cols="80"></textarea> <br/><br/>
+    <input type="submit" value="Enviar"/>
 </form>
 
 
