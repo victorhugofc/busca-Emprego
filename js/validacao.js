@@ -1,12 +1,27 @@
-$(document).ready(function(){
-    $("#formulariocad").submit(function(event) {
+// Espera pra ativar o código quando o documento
+// inteiro terminar de ser carregado
+$(document).ready( function(){
 
-      $(".obrigatorio").each(function(){
-        var valor = $(this).val();
-        if (valor == "") {
-          $(this).next("span").text("Campo Obrigatório");
-          event.preventDefault();
-        }
-      });
-    });
-  });
+    // Quanto o "formulario" for enviado...
+    $("#formulario").submit(function(event){
+
+        // para cada campo obrigatório...
+        $(".obrigatorio").each(function(){
+
+            // Armazena o valor do campo
+            var valor = $(this).val();
+            // Se o valor for igual a vazio
+            if(valor == ""){
+                // Coloca uma mensagem no span
+                $(this).next("span").text("Campo obrigatório");
+
+                // Para o envio do formulário
+                event.preventDefault();
+
+            }
+
+        }); // fim do each
+
+    }); // fim do submit
+
+} ); // fim do ready
